@@ -26,7 +26,7 @@ int main() {
     cout << "creating the linked list...";
     LinkedList list;
     cout << "done" << endl << endl;
-
+    /*
     cout << "checking list...\n";
     cout << "\tThere are " << list.getCount() << " nodes." << endl;
     list.printList();
@@ -112,7 +112,7 @@ int main() {
     cout << "\tThere are " << list.getCount() << " nodes." << endl;
     list.printList();
     cout << endl;
-
+*/
 
     return 0;
 }
