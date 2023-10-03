@@ -15,6 +15,16 @@
 class LinkedList {
     private:
         Node *head;
-};
+
+    public:
+        bool addNode(int, string*);
+        bool deleteNode(int);
+        bool getNode(int, Data*);
+        void printList(bool = false);
+        int getCount();
+        bool clearList();
+        bool exists(int);
+        
+    };
 
 #endif //LINKEDLIST_H
