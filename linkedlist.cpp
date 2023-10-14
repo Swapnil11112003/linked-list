@@ -10,6 +10,7 @@
  #include "linkedlist.h"
 
  LinkedList::LinkedList() {
+
     head = NULL; // pointer to a Node but pointing at "nothing" for now
 
     // creates a Node dynamically (this is the common case)
@@ -45,5 +46,38 @@
     node2->next = node3;  // point node2 next to node3
     node3->prev = node2;  // point node3 back to node2
     node3->next = NULL;   // point node3 next to NULL because there is no next
+
+}
+
+void LinkedList::printList(bool printBackwards) {
+    using std::cout;
+    using std::endl;
+
+    Node *current = head; // start a "tracking" pointer by pointing it head
+
+    if (!printBackwards) {
+        // traverse it forward
+        while(current){       // as long as we're not at the end, keep going
+            cout << current->data.id << ": " << current->data.data << endl;
+            current = current->next; // go to the next node
+        }
+        cout << endl;
+    } else {
+        // traverse it backward
+        // but first you have to find the tail
+        bool tail = false; // we're not at the tail yet
+        while (current && !tail) { // find the tail
+            if (current->next) {
+                current = current->next;
+            } else {
+                tail = true; // found the tail
+            }
+        }
+        // now traverse it backward
+        while (current){
+           cout << current->data.id << ": " << current->data.data << endl;
+           current = current->prev;
+        }
+    }
 
 }
