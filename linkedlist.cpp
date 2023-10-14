@@ -50,8 +50,6 @@
 }
 
 void LinkedList::printList(bool printBackwards) {
-    using std::cout;
-    using std::endl;
 
     Node *current = head; // start a "tracking" pointer by pointing it head
 
@@ -79,5 +77,35 @@ void LinkedList::printList(bool printBackwards) {
            current = current->prev;
         }
     }
+
+}
+
+bool LinkedList::addNode(int id, string* data) {
+    cout << "STUB: LinkedList::addNode() -> returning true" << endl;
+    return true;
+}
+bool LinkedList::deleteNode(int id) {
+    cout << "STUB: LinkedList::deleteNode() -> returning true" << endl;
+    return true;
+
+}
+bool LinkedList::getNode(int id, Data* data){
+    cout << "STUB: LinkedList::getNode() -> returning true" << endl;
+    return true;
+}
+
+int  LinkedList::getCount(){
+    cout << "STUB: LinkedList::getCount() -> returning 1" << endl;
+    return 1;
+
+}
+bool LinkedList::clearList(){
+    cout << "STUB: LinkedList::clearList() -> returning true" << endl;
+    return true;
+
+}
+bool LinkedList::exists(int id){
+    cout << "STUB: LinkedList::exists() -> returning true" << endl;
+    return true;
 
 }
