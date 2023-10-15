@@ -20,6 +20,8 @@ using std::endl;
 class LinkedList {
     private:
         Node *head;
+        bool isValidId(int);
+        bool isValidData(string*);
 
     public:
         LinkedList();

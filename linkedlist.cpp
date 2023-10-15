@@ -9,45 +9,9 @@
 
  #include "linkedlist.h"
 
- LinkedList::LinkedList() {
-
-    head = NULL; // pointer to a Node but pointing at "nothing" for now
-
-    // creates a Node dynamically (this is the common case)
-    // creates a Node dynamically
-    Node *node1;
-    node1 = new Node;
-
-    // creates a Node dynamically
-    Node *node2; 
-    node2 = new Node;
-
-    // creates a Node dynamically (this is the common case)
-    // creates a Node dynamically
-    Node *node3;
-    node3 = new Node;
-
-
-    node1->data.id = 1; // put data in node1
-    node1->data.data = "Hello"; // put data in node1
-
-   
-    node2->data.id = 2; // put data in node2
-    node2->data.data = "World"; // put data in node2
-
-    node3->data.id = 3; // put data in node3
-    node3->data.data = "Linked Lists are awesome!"; // put data in node3
-
-    // build a linked list (of size 3) out of the nodes made above
-    head = node1;         // first point the head at node1
-    node1->prev = NULL;   // point node1 prev to NULL because there is no previous
-    node1->next = node2;  // point node1 next to node2
-    node2->prev = node1;  // point node2 back to node1
-    node2->next = node3;  // point node2 next to node3
-    node3->prev = node2;  // point node3 back to node2
-    node3->next = NULL;   // point node3 next to NULL because there is no next
-
-}
+ LinkedList::LinkedList() 
+    : head{NULL} 
+{}
 
 void LinkedList::printList(bool printBackwards) {
 
@@ -79,10 +43,68 @@ void LinkedList::printList(bool printBackwards) {
     }
 
 }
+bool LinkedList::isValidId(int id) {
+    return (id > 0);
+}
+
+
+bool LinkedList::isValidData(string* data) {
+    return !data->empty();
+}
 
 bool LinkedList::addNode(int id, string* data) {
-    cout << "STUB: LinkedList::addNode() -> returning true" << endl;
-    return true;
+    bool nodeAdded = false;
+    bool isDuplicate = false;
+    if (isValidId(id) && isValidData(data)) {
+        Node *newNode = new Node;
+        newNode->data.id = id;
+        newNode->data.data = *data;
+
+        if(head = NULL) {
+            head = newNode;
+            newNode->prev = NULL;
+            newNode->next = NULL;
+
+            nodeAdded = true;
+        } else {
+            Node *current = head;
+            while(current->next != NULL && id > current->data.id) {
+                current = current->next;
+            }
+            //Checking for duplicates
+            if (id == current->data.id) {
+                isDuplicate = true;
+            }
+
+            // tail case
+            if (!isDuplicate && current->next == NULL) {
+                newNode->next = NULL;
+                newNode->prev = current;
+                current->next = newNode;
+                nodeAdded = true;
+            }
+            // head case
+            else if (!isDuplicate && current->prev == NULL) {
+                newNode->prev = NULL;
+                newNode->next = current;
+                current->prev = newNode;
+                head = newNode;
+                nodeAdded = true;
+            }
+            // general case
+            else if (!isDuplicate) {
+                newNode->next = current;
+                newNode->prev = current->prev;
+                current->prev->next = newNode;
+                current->prev = newNode;
+                nodeAdded = true;
+            }
+        }
+
+        
+    }
+    
+    return nodeAdded;
 }
 bool LinkedList::deleteNode(int id) {
     cout << "STUB: LinkedList::deleteNode() -> returning true" << endl;
@@ -105,7 +127,7 @@ bool LinkedList::clearList(){
 
 }
 bool LinkedList::exists(int id){
-    cout << "STUB: LinkedList::exists() -> returning true" << endl;
-    return true;
+    bool idExists = false;
+    return idExists;
 
 }
