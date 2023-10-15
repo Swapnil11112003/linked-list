@@ -43,6 +43,7 @@ void LinkedList::printList(bool printBackwards) {
     }
 
 }
+
 bool LinkedList::isValidId(int id) {
     return (id > 0);
 }
@@ -60,7 +61,7 @@ bool LinkedList::addNode(int id, string* data) {
         newNode->data.id = id;
         newNode->data.data = *data;
 
-        if(head = NULL) {
+        if(head == NULL) {
             head = newNode;
             newNode->prev = NULL;
             newNode->next = NULL;
@@ -157,20 +158,20 @@ bool LinkedList::getNode(int id, Data* data){
     return found;
 }
 
-int LinkedList::getCount(){
+int LinkedList::getCount() {
     Node *current = head;
     int count = 0;
-    while(current = current->next) {
+    while(current != NULL) {
         count++;
     }
     return count;
 
 }
 
-bool LinkedList::clearList(){
+bool LinkedList::clearList() {
     bool cleared = false;
     Node *current = head;
-    while(current = current->next) {
+    while(current == current->next) {
         current->next->prev = NULL;
         delete current;
         cleared = true;
