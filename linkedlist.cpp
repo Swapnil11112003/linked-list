@@ -112,11 +112,21 @@ bool LinkedList::deleteNode(int id) {
 
 }
 bool LinkedList::getNode(int id, Data* data){
-    cout << "STUB: LinkedList::getNode() -> returning true" << endl;
-    return true;
+    bool found = false;
+    Node *current = head;
+    while(current != NULL && id > current->data.id) {
+        current = current->next;
+    }
+
+    if (id == current->data.id) {
+        *data = current->data;
+        found = true;
+    }
+
+    return found;
 }
 
-int  LinkedList::getCount(){
+int LinkedList::getCount(){
     cout << "STUB: LinkedList::getCount() -> returning 1" << endl;
     return 1;
 
