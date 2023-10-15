@@ -142,14 +142,16 @@ bool LinkedList::deleteNode(int id) {
 }
 bool LinkedList::getNode(int id, Data* data){
     bool found = false;
-    Node *current = head;
-    while(current != NULL && id > current->data.id) {
-        current = current->next;
-    }
+    if (isValidId(id)) {
+        Node *current = head;
+        while(current != NULL && id > current->data.id) {
+            current = current->next;
+        }
 
-    if (id == current->data.id) {
-        *data = current->data;
-        found = true;
+        if (id == current->data.id) {
+            *data = current->data;
+            found = true;
+        }
     }
 
     return found;
@@ -170,11 +172,17 @@ bool LinkedList::clearList(){
 
 }
 
-bool LinkedList::exists(int id){
-    Node *current = head;
-    while(current != NULL && id > current->data.id) {
-        current = current->next;
-    }
-
-    return (id == current->data.id);
+bool LinkedList::exists(int id) {
+    bool found = false;
+    if (isValidId(id)) {
+        Node *current = head;
+        while(current != NULL && id > current->data.id) {
+            current = current->next;
+        }
+        if (id == current->data.id) {
+            found = true;
+        }
+    }   
+    
+    return found;
 }
