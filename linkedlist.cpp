@@ -166,10 +166,16 @@ int LinkedList::getCount(){
     return count;
 
 }
-bool LinkedList::clearList(){
-    cout << "STUB: LinkedList::clearList() -> returning true" << endl;
-    return true;
 
+bool LinkedList::clearList(){
+    bool cleared = false;
+    Node *current = head;
+    while(current = current->next) {
+        current->next->prev = NULL;
+        delete current;
+        cleared = true;
+    }
+    return cleared;
 }
 
 bool LinkedList::exists(int id) {
