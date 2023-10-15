@@ -133,5 +133,5 @@ bool LinkedList::exists(int id){
         current = current->next;
     }
 
-    return (id == current->data.id)
+    return (id == current->data.id);
 }
