@@ -127,8 +127,12 @@ bool LinkedList::getNode(int id, Data* data){
 }
 
 int LinkedList::getCount(){
-    cout << "STUB: LinkedList::getCount() -> returning 1" << endl;
-    return 1;
+    Node *current = head;
+    int count = 0;
+    while(current = current->next) {
+        count++;
+    }
+    return count;
 
 }
 bool LinkedList::clearList(){
