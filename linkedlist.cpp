@@ -126,8 +126,12 @@ bool LinkedList::clearList(){
     return true;
 
 }
-bool LinkedList::exists(int id){
-    bool idExists = false;
-    return idExists;
 
+bool LinkedList::exists(int id){
+    Node *current = head;
+    while(current != NULL && id > current->data.id) {
+        current = current->next;
+    }
+
+    return (id == current->data.id)
 }
