@@ -55,7 +55,6 @@ bool LinkedList::isValidData(string* data) {
 
 bool LinkedList::addNode(int id, string* data) {
     bool nodeAdded = false;
-    bool isDuplicate = false;
 
     if (isValidId(id) && isValidData(data)) {
         Node *current = head;
@@ -69,44 +68,37 @@ bool LinkedList::addNode(int id, string* data) {
             head = newNode;
             nodeAdded = true;
         } else {
-            std::cout << std::endl;
             while(current->next != NULL && id > current->data.id) {
                 current = current->next;
-                std::cout << "X";
             }
-            std::cout << std::endl;
 
-            //Checking for duplicates
-            if (id == current->data.id) {
-                isDuplicate = true;
-            } else {
+            if (id != current->data.id) {
+                // Allocate memory for new Node
                 newNode = new Node;
                 newNode->data.id = id;
                 newNode->data.data = *data;
-            }
 
-            // head case
-            if (!isDuplicate && id < current->data.id && current->prev == NULL) {
-                newNode->prev = NULL;
-                newNode->next = current;
-                current->prev = newNode;
-                head = newNode;
-                nodeAdded = true;
-            }
-            // tail case
-            else if (!isDuplicate && id > current->data.id && current->next == NULL) {
-                newNode->next = NULL;
-                newNode->prev = current;
-                current->next = newNode;
-                nodeAdded = true;
-            }
-            // general case
-            else if (!isDuplicate) {
-                newNode->next = current;
-                newNode->prev = current->prev;
-                current->prev->next = newNode;
-                current->prev = newNode;
-                nodeAdded = true;
+                if (id < current->data.id && current->prev == NULL) {
+                    // head case
+                    newNode->prev = NULL;
+                    newNode->next = current;
+                    current->prev = newNode;
+                    head = newNode;
+                    nodeAdded = true;
+                } else if (id > current->data.id && current->next == NULL) {
+                    // tail case
+                    newNode->next = NULL;
+                    newNode->prev = current;
+                    current->next = newNode;
+                    nodeAdded = true;
+                } else {
+                    // general case
+                    newNode->next = current;
+                    newNode->prev = current->prev;
+                    current->prev->next = newNode;
+                    current->prev = newNode;
+                    nodeAdded = true;
+                }
             }
         }
     }
