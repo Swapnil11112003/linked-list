@@ -13,6 +13,10 @@
     : head{NULL} 
 {}
 
+LinkedList::~LinkedList(){
+    clearList();
+}
+
 void LinkedList::printList(bool printBackwards) {
 
     Node *current = head; // start a "tracking" pointer by pointing it head

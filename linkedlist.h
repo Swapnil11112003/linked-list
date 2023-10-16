@@ -25,6 +25,7 @@ class LinkedList {
 
     public:
         LinkedList();
+        ~LinkedList();
         bool addNode(int, string*);
         bool deleteNode(int);
         bool getNode(int, Data*);
