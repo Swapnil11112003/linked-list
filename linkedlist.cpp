@@ -105,39 +105,41 @@ bool LinkedList::addNode(int id, string* data) {
     
     return nodeAdded;
 }
+
 bool LinkedList::deleteNode(int id) {
     bool deleted = false;
-    Node *current = head;
     
-    if (isValidId(id) && current != NULL){
-        // head case
-        if (id == current->data.id) {
-            current->next->prev = NULL;
-            delete current;
-            deleted = true;
-        }
+    if (isValidId(id) && head != NULL) {
+        Node *current = head;
 
         while(current->next != NULL && id > current->data.id) {
             current = current->next;
         }
 
-        // tail case
-        if (current->next == NULL && id == current->data.id) {
-            current->prev->next = NULL;
-            delete current;
-            deleted = true;
-        }
+        if (id == current->data.id) {
+            if (current->prev == NULL) {
+                // head case
+                // current->next->prev = NULL;
+                head = current->next;
 
-        // General case
-        else if (id == current->data.id) {
-            current->prev->next = current->next;
-            current->next->prev = current->prev;
-            delete current;
-            deleted = true;
+                delete current;
+                deleted = true;
+            } else if (current->next == NULL) {
+                // tail case
+                current->prev->next = NULL;
+                delete current;
+                deleted = true;
+            } else {
+                // general case
+                current->prev->next = current->next;
+                current->next->prev = current->prev;
+                delete current;
+                deleted = true;
+            }
         }
     }
 
-    return true;
+    return deleted;
 }
 
 bool LinkedList::getNode(int id, Data* data){
