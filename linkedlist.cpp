@@ -56,40 +56,48 @@ bool LinkedList::isValidData(string* data) {
 bool LinkedList::addNode(int id, string* data) {
     bool nodeAdded = false;
     bool isDuplicate = false;
+
     if (isValidId(id) && isValidData(data)) {
-        Node *newNode = new Node;
-        newNode->data.id = id;
-        newNode->data.data = *data;
+        Node *current = head;
+        Node *newNode;
 
-        if(head == NULL) {
+        if (current == NULL) {
+            newNode = new Node;
+            newNode->data.id = id;
+            newNode->data.data = *data;
+
             head = newNode;
-            newNode->prev = NULL;
-            newNode->next = NULL;
-
             nodeAdded = true;
         } else {
-            Node *current = head;
+            std::cout << std::endl;
             while(current->next != NULL && id > current->data.id) {
                 current = current->next;
+                std::cout << "X";
             }
+            std::cout << std::endl;
+
             //Checking for duplicates
             if (id == current->data.id) {
                 isDuplicate = true;
+            } else {
+                newNode = new Node;
+                newNode->data.id = id;
+                newNode->data.data = *data;
             }
 
-            // tail case
-            if (!isDuplicate && current->next == NULL) {
-                newNode->next = NULL;
-                newNode->prev = current;
-                current->next = newNode;
-                nodeAdded = true;
-            }
             // head case
-            else if (!isDuplicate && current->prev == NULL) {
+            if (!isDuplicate && id < current->data.id && current->prev == NULL) {
                 newNode->prev = NULL;
                 newNode->next = current;
                 current->prev = newNode;
                 head = newNode;
+                nodeAdded = true;
+            }
+            // tail case
+            else if (!isDuplicate && id > current->data.id && current->next == NULL) {
+                newNode->next = NULL;
+                newNode->prev = current;
+                current->next = newNode;
                 nodeAdded = true;
             }
             // general case
@@ -101,8 +109,6 @@ bool LinkedList::addNode(int id, string* data) {
                 nodeAdded = true;
             }
         }
-
-        
     }
     
     return nodeAdded;
