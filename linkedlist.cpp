@@ -119,8 +119,10 @@ bool LinkedList::deleteNode(int id) {
         if (id == current->data.id) {
             if (current->prev == NULL) {
                 // head case
-                // current->next->prev = NULL;
                 head = current->next;
+                if (head != NULL) {
+                    head->prev = NULL;
+                }
 
                 delete current;
                 deleted = true;
@@ -175,22 +177,15 @@ int LinkedList::getCount() {
 }
 
 bool LinkedList::clearList() {
-    bool cleared = false;
+    Node *current;
 
-    if (head != NULL) {
-        Node *current = head->next;
+    while (head != NULL) {
+        current = head->next;
         delete head;
-
-        while (current != NULL) {
-            head = current;
-            current = current->next;
-            delete head;
-        }
-
-        cleared = true;
+        head = current;
     }
 
-    return cleared;
+    return true;
 }
 
 bool LinkedList::exists(int id) {
