@@ -141,11 +141,15 @@ bool LinkedList::deleteNode(int id) {
 
     return true;
 }
+
 bool LinkedList::getNode(int id, Data* data){
     bool found = false;
     if (isValidId(id)) {
+
+        std::cout << "---ID IS VALID---" << endl;
         Node *current = head;
         while(current != NULL && id > current->data.id) {
+            std::cout << id << " > " << current->data.id << endl;
             current = current->next;
         }
 
@@ -161,17 +165,21 @@ bool LinkedList::getNode(int id, Data* data){
 int LinkedList::getCount() {
     Node *current = head;
     int count = 0;
-    while(current != NULL) {
-        count++;
-    }
-    return count;
 
+    if (current != NULL) {
+        count++;
+        while(current = current->next) {
+            count++;
+        }
+    }
+
+    return count;
 }
 
 bool LinkedList::clearList() {
     bool cleared = false;
     Node *current = head;
-    while(current == current->next) {
+    while(current = current->next) {
         current->next->prev = NULL;
         delete current;
         cleared = true;
